@@ -1,0 +1,213 @@
+/*MAIN CSS*/
+
+html {
+	margin: 0;
+	padding: 0;
+}
+
+@font-face {
+	font-family: 'Adam';
+	src: url('assets/fonts/Adam.otf');
+}
+
+body {
+	max-width: 60em;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	/*background-color: #e2c582;*/
+	/*#ece4ab, #e2c582*/
+}
+
+/*h1, h2, h3, h4 {
+	margin: 0;
+}*/
+
+p  {
+	margin: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: none; 
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 1em 0 1em 0;
+}
+
+.left {
+	height: 150px;
+	width: 143px;
+}
+
+.right {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.social {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 2.5em;
+}
+
+.social-icon {
+	height: 2.2em;
+	padding-left: 1em;
+}
+
+.menu {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.menu-link {
+	font-size: xx-large;
+	font-family: 'Adam', Arial, serif;
+	padding-left: 1em;
+}
+
+.banner {
+	height: 20em;
+}
+
+.title {
+	display: flex;
+	justify-content: center;
+	font-size: xx-large;
+	font-family: 'Adam', Arial, serif;
+}
+
+.title-big {
+	font-size: 4em;
+}
+
+.about {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #808080;
+	font-family: 'Adam', Arial, serif;
+	margin-top: 2em;
+}
+
+.bio {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 2em;
+}
+
+.gary {
+	max-height: 20em;
+	padding: 1em 1em 0 1em;
+}
+
+.description {
+	padding: 0 1em 0 1em;
+	font-size: x-large;
+	text-align: start;
+}
+
+.footer {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin-top: 4em;
+	height: 4em;
+	background-color: #808080;
+	font-family: 'Adam', Arial, serif;
+}
+
+.footer-link {
+	padding: 0 0.5em 0 0;
+	font-size: large;
+}
+
+/*CONTACT CSS*/
+
+.contact {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.contact-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	width: 100%;
+	max-width: 35em;
+}
+
+input, textarea {
+	display: flex;
+	margin-top: 1em;
+	font-family: 'Adam', Arial, serif;
+	border: 1px solid #103742;
+	font-size: x-large;
+	padding: 1em;
+	color: #666260;
+
+}
+
+textarea {
+	height: 8em;
+}
+
+button {
+	margin-top: 1.5em;
+	font-family: 'Adam', Arial, serif;
+	border: 1px solid #103742;
+	font-size: x-large;
+	padding: 1em;
+}
+
+button:hover {
+	cursor: pointer;
+	background-color: #042c4c;
+	border-color: #042c4c;
+	color: white;
+
+}
+
+/*SLICK CSS*/
+
+* {
+	box-sizing: border-box;
+}
+
+.slider {
+}
+
+.slick-slide {
+	margin: 0 7px;
+}
+
+.slick-slide img {
+	width: 100%;
+	/*max-height: 25em;*/
+}
+
+.slick-prev:before,
+.slick-next:before {
+	color: black;
+}
+
+.slick-slide {
+	transition: all ease-in-out .3s;
+	opacity: .2;
+}
+
+.slick-active {
+	opacity: .5;
+}
+
+.slick-current {
+	opacity: 1;
+}
