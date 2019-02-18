@@ -66,6 +66,13 @@ a {
 	justify-content: flex-end;
 }
 
+
+@media screen and (max-width: 640px) {
+  .menu {
+    display: none;
+  }
+}
+
 .menu-link {
 	font-size: xx-large;
 	font-family: 'Adam', Arial, serif;
@@ -73,6 +80,7 @@ a {
 }
 
 .banner {
+	object-fit: cover;
 	height: 20em;
 }
 
@@ -85,6 +93,10 @@ a {
 
 .title-big {
 	font-size: 4em;
+}
+
+.l717 {
+	font-family: 'Adam', Arial, serif;
 }
 
 .about {
@@ -103,9 +115,24 @@ a {
 	padding-bottom: 2em;
 }
 
+@media screen and (max-width: 640px) {
+  .bio {
+    display: flex;
+	flex-direction: column;
+  }
+}
+
 .gary {
 	max-height: 20em;
-	padding: 1em 1em 0 1em;
+	padding-left: 1em;
+	object-fit: contain;
+}
+
+@media screen and (max-width: 640px) {
+  .gary {
+  	padding-left: 0;
+    padding-bottom: 1em;
+  }
 }
 
 .description {
@@ -125,7 +152,7 @@ a {
 }
 
 .footer-link {
-	padding: 0 0.5em 0 0;
+	padding-left: 0.5em;
 	font-size: large;
 }
 
@@ -190,8 +217,14 @@ button:hover {
 }
 
 .slick-slide img {
-	width: 100%;
-	/*max-height: 25em;*/
+	/*width: 100%;*/
+	max-height: 40em;
+}
+
+@media screen and (max-width: 640px) {
+  .slick-slide img {
+    max-height: 23em;
+  }
 }
 
 .slick-prev:before,

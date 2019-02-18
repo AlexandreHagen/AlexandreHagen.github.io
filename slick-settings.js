@@ -27,13 +27,17 @@ $(function() {
 			settings: {
 				slidesToShow: 1,
 				slidesToScroll: 1,
+				prevArrow: false,
+    			nextArrow: false,
 			}
 		},
 		{
 			breakpoint: 480,
 			settings: {
 				slidesToShow: 1,
-				slidesToScroll: 1
+				slidesToScroll: 1,
+				prevArrow: false,
+    			nextArrow: false,
 			}
 		}
 	    ]
