@@ -9,6 +9,10 @@ html {
 	font-family: 'Adam';
 	src: url('assets/fonts/Adam.otf');
 }
+@font-face {
+	font-family: 'Lato';
+	src: url('assets/fonts/Lato-Thin.ttf');
+}
 
 body {
 	max-width: 60em;
@@ -74,6 +78,12 @@ a {
 	padding-left: 1em;
 }
 
+@media screen and (max-width: 640px) {
+  .social-icon {
+    height: 1.6em;
+  }
+}
+
 .menu {
 	display: flex;
 	justify-content: flex-end;
@@ -110,11 +120,10 @@ a {
 	font-size: 4em;
 }
 
-.l717 {
-	font-family: 'Adam', Arial, serif;
+.sky-catcher {
+	font-family: 'Lato', Arial, serif;
 	padding: 1em 1em 0 1em;
-	font-size: large;
-
+	font-size: 1.3em;
 }
 
 .about {
@@ -122,7 +131,7 @@ a {
 	flex-direction: column;
 	justify-content: center;
 	background-color: #808080;
-	font-family: 'Adam', Arial, serif;
+	font-family: 'Lato', Arial, serif;
 	margin-top: 2em;
 }
 
@@ -219,6 +228,23 @@ button:hover {
 	border-color: #042c4c;
 	color: white;
 
+}
+
+
+/*PRESS*/
+
+.section {
+	margin-top: 3em;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.section a {
+	padding: 0.5em 0 0.5em 0;
+	font-family: 'Adam', Arial, serif;
+	font-size: large;
 }
 
 /*SLICK CSS*/
