@@ -127,6 +127,14 @@ a {
 	font-size: 1.3em;
 }
 
+.info {
+	margin-top: 0.5em;
+	display: flex;
+	justify-content: center;
+	font-family: 'Adam', Arial, serif;
+	font-size: x-large;
+}
+
 .about {
 	display: flex;
 	flex-direction: column;
