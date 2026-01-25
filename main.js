@@ -6,6 +6,34 @@
 (function() {
 	'use strict';
 
+	// =====================================================
+	// CONFIGURATION - Modifier ici uniquement
+	// =====================================================
+	const CONFIG = {
+		GA_MEASUREMENT_ID: 'G-XXXXXXXXXX' // Remplacer par ton ID GA4
+	};
+
+	// Google Analytics 4
+	function initAnalytics() {
+		if (!CONFIG.GA_MEASUREMENT_ID || CONFIG.GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
+			console.log('Google Analytics: ID non configure');
+			return;
+		}
+
+		// Load gtag script
+		const script = document.createElement('script');
+		script.async = true;
+		script.src = `https://www.googletagmanager.com/gtag/js?id=${CONFIG.GA_MEASUREMENT_ID}`;
+		document.head.appendChild(script);
+
+		// Initialize gtag
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		window.gtag = gtag;
+		gtag('js', new Date());
+		gtag('config', CONFIG.GA_MEASUREMENT_ID);
+	}
+
 	// Set current year in footer
 	function setYear() {
 		const yearElement = document.getElementById('year');
@@ -234,6 +262,7 @@
 
 	// Initialize when DOM is ready
 	function init() {
+		initAnalytics();
 		setYear();
 		initFadeInAnimations();
 		initCarousels();
