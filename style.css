@@ -748,16 +748,27 @@ button:hover {
 	cursor: pointer;
 	padding: 0;
 	z-index: 100;
+	/* Remove tap highlight and selection */
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 /* Remove default button styles and focus outline */
 .hamburger:focus {
 	outline: none;
+	background: transparent;
+}
+
+.hamburger:active {
+	background: transparent;
 }
 
 .hamburger:focus-visible {
 	outline: 2px solid var(--color-accent);
 	outline-offset: 4px;
+	background: transparent;
 }
 
 .hamburger span {
@@ -767,6 +778,7 @@ button:hover {
 	background-color: var(--color-text);
 	border-radius: 2px;
 	transition: transform var(--transition), opacity var(--transition), background-color var(--transition);
+	pointer-events: none;
 }
 
 .hamburger.active span {
@@ -968,7 +980,13 @@ button:hover {
 }
 
 .lightbox-image {
-	transition: transform 0.2s ease;
+	transition: transform 0.15s ease-out;
+	user-select: none;
+	-webkit-user-drag: none;
+}
+
+.lightbox-image.dragging {
+	transition: none;
 }
 
 .lightbox-zoom-controls {

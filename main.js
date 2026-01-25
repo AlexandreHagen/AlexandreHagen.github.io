@@ -63,7 +63,7 @@
 	}
 
 	// =====================================================
-	// LIGHTBOX with Zoom
+	// LIGHTBOX with Zoom & Pan
 	// =====================================================
 	class Lightbox {
 		constructor() {
@@ -73,6 +73,12 @@
 			this.scale = 1;
 			this.minScale = 1;
 			this.maxScale = 4;
+			// Pan position
+			this.panX = 0;
+			this.panY = 0;
+			this.isDragging = false;
+			this.dragStartX = 0;
+			this.dragStartY = 0;
 			this.create();
 			this.bindEvents();
 		}
@@ -119,7 +125,7 @@
 			this.zoomOutBtn.addEventListener('click', () => this.zoom(-0.5));
 
 			this.overlay.addEventListener('click', (e) => {
-				if (e.target === this.overlay || e.target === this.imageContainer) {
+				if (e.target === this.overlay) {
 					if (this.scale > 1) {
 						this.resetZoom();
 					} else {
@@ -129,7 +135,8 @@
 			});
 
 			// Double click to zoom
-			this.image.addEventListener('dblclick', () => {
+			this.image.addEventListener('dblclick', (e) => {
+				e.preventDefault();
 				if (this.scale > 1) {
 					this.resetZoom();
 				} else {
@@ -144,6 +151,34 @@
 				this.zoom(delta);
 			});
 
+			// Mouse drag for panning (desktop)
+			this.image.addEventListener('mousedown', (e) => {
+				if (this.scale > 1) {
+					e.preventDefault();
+					this.isDragging = true;
+					this.dragStartX = e.clientX - this.panX;
+					this.dragStartY = e.clientY - this.panY;
+					this.image.style.cursor = 'grabbing';
+					this.image.classList.add('dragging');
+				}
+			});
+
+			document.addEventListener('mousemove', (e) => {
+				if (this.isDragging && this.scale > 1) {
+					this.panX = e.clientX - this.dragStartX;
+					this.panY = e.clientY - this.dragStartY;
+					this.updateTransform();
+				}
+			});
+
+			document.addEventListener('mouseup', () => {
+				if (this.isDragging) {
+					this.isDragging = false;
+					this.image.style.cursor = this.scale > 1 ? 'grab' : 'default';
+					this.image.classList.remove('dragging');
+				}
+			});
+
 			// Keyboard
 			document.addEventListener('keydown', (e) => {
 				if (!this.isOpen) return;
@@ -154,36 +189,60 @@
 				if (e.key === '-') this.zoom(-0.5);
 			});
 
-			// Touch swipe & pinch zoom
+			// Touch events for swipe, pinch zoom & pan
 			let touchStartX = 0;
+			let touchStartY = 0;
 			let initialDistance = 0;
+			let isSingleTouch = false;
 
-			this.overlay.addEventListener('touchstart', (e) => {
+			this.image.addEventListener('touchstart', (e) => {
 				if (e.touches.length === 1) {
-					touchStartX = e.touches[0].screenX;
+					isSingleTouch = true;
+					touchStartX = e.touches[0].clientX;
+					touchStartY = e.touches[0].clientY;
+					if (this.scale > 1) {
+						this.isDragging = true;
+						this.dragStartX = touchStartX - this.panX;
+						this.dragStartY = touchStartY - this.panY;
+						this.image.classList.add('dragging');
+					}
 				} else if (e.touches.length === 2) {
+					isSingleTouch = false;
+					this.isDragging = false;
+					this.image.classList.remove('dragging');
 					initialDistance = this.getTouchDistance(e.touches);
 				}
 			}, { passive: true });
 
-			this.overlay.addEventListener('touchmove', (e) => {
+			this.image.addEventListener('touchmove', (e) => {
 				if (e.touches.length === 2 && initialDistance > 0) {
+					// Pinch zoom
 					const currentDistance = this.getTouchDistance(e.touches);
 					const delta = (currentDistance - initialDistance) / 200;
 					this.zoom(delta);
 					initialDistance = currentDistance;
+				} else if (e.touches.length === 1 && this.isDragging && this.scale > 1) {
+					// Pan when zoomed
+					e.preventDefault();
+					this.panX = e.touches[0].clientX - this.dragStartX;
+					this.panY = e.touches[0].clientY - this.dragStartY;
+					this.updateTransform();
 				}
-			}, { passive: true });
+			}, { passive: false });
 
-			this.overlay.addEventListener('touchend', (e) => {
-				if (e.changedTouches.length === 1 && initialDistance === 0) {
-					const diff = touchStartX - e.changedTouches[0].screenX;
-					if (Math.abs(diff) > 50 && this.scale === 1) {
+			this.image.addEventListener('touchend', (e) => {
+				if (isSingleTouch && !this.isDragging && this.scale === 1) {
+					// Swipe to navigate (only when not zoomed)
+					const diff = touchStartX - e.changedTouches[0].clientX;
+					if (Math.abs(diff) > 50) {
 						if (diff > 0) this.next();
 						else this.prev();
 					}
 				}
+				this.isDragging = false;
+				this.image.classList.remove('dragging');
 				initialDistance = 0;
+				isSingleTouch = false;
 			}, { passive: true });
 		}
 
@@ -193,16 +252,39 @@
 			return Math.sqrt(dx * dx + dy * dy);
 		}
 
+		updateTransform() {
+			this.image.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(${this.scale})`;
+		}
+
 		zoom(delta) {
+			const oldScale = this.scale;
 			this.scale = Math.max(this.minScale, Math.min(this.maxScale, this.scale + delta));
-			this.image.style.transform = `scale(${this.scale})`;
+
+			// Adjust pan to keep zoom centered
+			if (oldScale !== this.scale) {
+				const ratio = this.scale / oldScale;
+				this.panX *= ratio;
+				this.panY *= ratio;
+			}
+
+			// Reset pan if we're back to 1x
+			if (this.scale === 1) {
+				this.panX = 0;
+				this.panY = 0;
+			}
+
+			this.updateTransform();
 			this.zoomLevel.textContent = `${Math.round(this.scale * 100)}%`;
+			this.image.style.cursor = this.scale > 1 ? 'grab' : 'default';
 		}
 
 		resetZoom() {
 			this.scale = 1;
-			this.image.style.transform = 'scale(1)';
+			this.panX = 0;
+			this.panY = 0;
+			this.updateTransform();
 			this.zoomLevel.textContent = '100%';
+			this.image.style.cursor = 'default';
 		}
 
 		open(images, index = 0) {
