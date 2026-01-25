@@ -229,20 +229,22 @@ img {
 	align-items: center;
 	justify-content: center;
 	margin: 0;
-	padding: 0 7px;
-	opacity: 0.2;
-	transition: opacity 0.3s ease, transform 0.3s ease;
-	transform: scale(0.9);
+	padding: 0 10px;
+	opacity: 0.3;
+	transition: opacity 0.4s ease, transform 0.4s ease;
+	transform: scale(0.65);
 }
 
 .carousel-item.active {
 	opacity: 1;
-	transform: scale(1);
+	transform: scale(1.05);
+	z-index: 5;
 }
 
 .carousel-item.prev,
 .carousel-item.next {
 	opacity: 0.5;
+	transform: scale(0.8);
 }
 
 .carousel-item img {
