@@ -63,13 +63,16 @@
 	}
 
 	// =====================================================
-	// LIGHTBOX
+	// LIGHTBOX with Zoom
 	// =====================================================
 	class Lightbox {
 		constructor() {
 			this.isOpen = false;
 			this.currentImages = [];
 			this.currentIndex = 0;
+			this.scale = 1;
+			this.minScale = 1;
+			this.maxScale = 4;
 			this.create();
 			this.bindEvents();
 		}
@@ -82,53 +85,130 @@
 				<button class="lightbox-prev" aria-label="Precedent">&#10094;</button>
 				<button class="lightbox-next" aria-label="Suivant">&#10095;</button>
 				<div class="lightbox-content">
-					<img class="lightbox-image" src="" alt="">
+					<div class="lightbox-image-container">
+						<img class="lightbox-image" src="" alt="">
+					</div>
 					<div class="lightbox-caption"></div>
+					<div class="lightbox-counter"></div>
+				</div>
+				<div class="lightbox-zoom-controls">
+					<button class="lightbox-zoom-out" aria-label="Zoom arriere">−</button>
+					<span class="lightbox-zoom-level">100%</span>
+					<button class="lightbox-zoom-in" aria-label="Zoom avant">+</button>
 				</div>
 			`;
 			document.body.appendChild(this.overlay);
 
+			this.imageContainer = this.overlay.querySelector('.lightbox-image-container');
 			this.image = this.overlay.querySelector('.lightbox-image');
 			this.caption = this.overlay.querySelector('.lightbox-caption');
+			this.counter = this.overlay.querySelector('.lightbox-counter');
 			this.closeBtn = this.overlay.querySelector('.lightbox-close');
 			this.prevBtn = this.overlay.querySelector('.lightbox-prev');
 			this.nextBtn = this.overlay.querySelector('.lightbox-next');
+			this.zoomInBtn = this.overlay.querySelector('.lightbox-zoom-in');
+			this.zoomOutBtn = this.overlay.querySelector('.lightbox-zoom-out');
+			this.zoomLevel = this.overlay.querySelector('.lightbox-zoom-level');
 		}
 
 		bindEvents() {
 			this.closeBtn.addEventListener('click', () => this.close());
 			this.prevBtn.addEventListener('click', () => this.prev());
 			this.nextBtn.addEventListener('click', () => this.next());
+			this.zoomInBtn.addEventListener('click', () => this.zoom(0.5));
+			this.zoomOutBtn.addEventListener('click', () => this.zoom(-0.5));
 
 			this.overlay.addEventListener('click', (e) => {
-				if (e.target === this.overlay) this.close();
+				if (e.target === this.overlay || e.target === this.imageContainer) {
+					if (this.scale > 1) {
+						this.resetZoom();
+					} else {
+						this.close();
+					}
+				}
 			});
 
+			// Double click to zoom
+			this.image.addEventListener('dblclick', () => {
+				if (this.scale > 1) {
+					this.resetZoom();
+				} else {
+					this.zoom(1);
+				}
+			});
+
+			// Mouse wheel zoom
+			this.imageContainer.addEventListener('wheel', (e) => {
+				e.preventDefault();
+				const delta = e.deltaY > 0 ? -0.3 : 0.3;
+				this.zoom(delta);
+			});
+
+			// Keyboard
 			document.addEventListener('keydown', (e) => {
 				if (!this.isOpen) return;
 				if (e.key === 'Escape') this.close();
 				if (e.key === 'ArrowLeft') this.prev();
 				if (e.key === 'ArrowRight') this.next();
+				if (e.key === '+' || e.key === '=') this.zoom(0.5);
+				if (e.key === '-') this.zoom(-0.5);
 			});
 
-			// Touch swipe
+			// Touch swipe & pinch zoom
 			let touchStartX = 0;
+			let initialDistance = 0;
+
 			this.overlay.addEventListener('touchstart', (e) => {
-				touchStartX = e.changedTouches[0].screenX;
+				if (e.touches.length === 1) {
+					touchStartX = e.touches[0].screenX;
+				} else if (e.touches.length === 2) {
+					initialDistance = this.getTouchDistance(e.touches);
+				}
+			}, { passive: true });
+
+			this.overlay.addEventListener('touchmove', (e) => {
+				if (e.touches.length === 2 && initialDistance > 0) {
+					const currentDistance = this.getTouchDistance(e.touches);
+					const delta = (currentDistance - initialDistance) / 200;
+					this.zoom(delta);
+					initialDistance = currentDistance;
+				}
 			}, { passive: true });
 
 			this.overlay.addEventListener('touchend', (e) => {
-				const diff = touchStartX - e.changedTouches[0].screenX;
-				if (Math.abs(diff) > 50) {
-					if (diff > 0) this.next();
-					else this.prev();
+				if (e.changedTouches.length === 1 && initialDistance === 0) {
+					const diff = touchStartX - e.changedTouches[0].screenX;
+					if (Math.abs(diff) > 50 && this.scale === 1) {
+						if (diff > 0) this.next();
+						else this.prev();
+					}
 				}
+				initialDistance = 0;
 			}, { passive: true });
+		}
+
+		getTouchDistance(touches) {
+			const dx = touches[0].clientX - touches[1].clientX;
+			const dy = touches[0].clientY - touches[1].clientY;
+			return Math.sqrt(dx * dx + dy * dy);
+		}
+
+		zoom(delta) {
+			this.scale = Math.max(this.minScale, Math.min(this.maxScale, this.scale + delta));
+			this.image.style.transform = `scale(${this.scale})`;
+			this.zoomLevel.textContent = `${Math.round(this.scale * 100)}%`;
+		}
+
+		resetZoom() {
+			this.scale = 1;
+			this.image.style.transform = 'scale(1)';
+			this.zoomLevel.textContent = '100%';
 		}
 
 		open(images, index = 0) {
 			this.currentImages = images;
 			this.currentIndex = index;
+			this.resetZoom();
 			this.updateImage();
 			this.overlay.classList.add('active');
 			this.isOpen = true;
@@ -139,6 +219,7 @@
 			this.overlay.classList.remove('active');
 			this.isOpen = false;
 			document.body.style.overflow = '';
+			this.resetZoom();
 		}
 
 		updateImage() {
@@ -148,6 +229,7 @@
 			this.image.src = item.src;
 			this.image.alt = item.alt;
 			this.caption.textContent = item.caption || item.alt;
+			this.counter.textContent = `${this.currentIndex + 1} / ${this.currentImages.length}`;
 
 			// Show/hide nav buttons
 			const showNav = this.currentImages.length > 1;
@@ -156,11 +238,13 @@
 		}
 
 		prev() {
+			this.resetZoom();
 			this.currentIndex = (this.currentIndex - 1 + this.currentImages.length) % this.currentImages.length;
 			this.updateImage();
 		}
 
 		next() {
+			this.resetZoom();
 			this.currentIndex = (this.currentIndex + 1) % this.currentImages.length;
 			this.updateImage();
 		}
@@ -224,6 +308,7 @@
 		init() {
 			this.createWrapper();
 			this.createNavigation();
+			this.createIndicators();
 			this.updateSlides();
 			this.bindEvents();
 
@@ -266,6 +351,39 @@
 
 			this.carousel.appendChild(this.prevBtn);
 			this.carousel.appendChild(this.nextBtn);
+		}
+
+		createIndicators() {
+			this.indicators = document.createElement('div');
+			this.indicators.className = 'carousel-indicators';
+
+			for (let i = 0; i < this.itemCount; i++) {
+				const dot = document.createElement('button');
+				dot.className = 'carousel-dot';
+				dot.setAttribute('aria-label', `Aller a l'image ${i + 1}`);
+				dot.addEventListener('click', (e) => {
+					e.stopPropagation();
+					this.goTo(i);
+				});
+				this.indicators.appendChild(dot);
+			}
+
+			this.carousel.appendChild(this.indicators);
+			this.dots = this.indicators.querySelectorAll('.carousel-dot');
+		}
+
+		updateIndicators() {
+			this.dots.forEach((dot, index) => {
+				dot.classList.toggle('active', index === this.currentIndex);
+			});
+		}
+
+		goTo(index) {
+			if (this.isAnimating || index === this.currentIndex) return;
+			this.isAnimating = true;
+			this.currentIndex = index;
+			this.updateSlides();
+			setTimeout(() => { this.isAnimating = false; }, this.options.speed);
 		}
 
 		bindEvents() {
@@ -338,6 +456,7 @@
 			}
 
 			this.track.style.transform = `translateX(${offset}%)`;
+			this.updateIndicators();
 		}
 
 		getPrevIndex() {
@@ -388,11 +507,111 @@
 		});
 	}
 
+	// =====================================================
+	// MOBILE MENU (Hamburger)
+	// =====================================================
+	function initMobileMenu() {
+		const header = document.querySelector('.header');
+		const menu = document.querySelector('.menu');
+		const social = document.querySelector('.social');
+		const langSelector = document.querySelector('.lang-selector');
+		if (!header || !menu) return;
+
+		// Create hamburger button
+		const hamburger = document.createElement('button');
+		hamburger.className = 'hamburger';
+		hamburger.setAttribute('aria-label', 'Menu');
+		hamburger.setAttribute('aria-expanded', 'false');
+		hamburger.innerHTML = '<span></span><span></span><span></span>';
+
+		// Insert hamburger in header
+		header.appendChild(hamburger);
+
+		// Clone social icons into mobile menu
+		if (social) {
+			const mobileSocial = social.cloneNode(true);
+			mobileSocial.className = 'mobile-social';
+			menu.appendChild(mobileSocial);
+		}
+
+		// Clone language selector into mobile menu
+		if (langSelector) {
+			const mobileLang = langSelector.cloneNode(true);
+			mobileLang.className = 'mobile-lang';
+			menu.appendChild(mobileLang);
+		}
+
+		// Toggle menu
+		hamburger.addEventListener('click', () => {
+			const isOpen = hamburger.classList.toggle('active');
+			menu.classList.toggle('active');
+			hamburger.setAttribute('aria-expanded', isOpen);
+			document.body.style.overflow = isOpen ? 'hidden' : '';
+		});
+
+		// Close menu on link click
+		menu.querySelectorAll('a').forEach(link => {
+			link.addEventListener('click', () => {
+				hamburger.classList.remove('active');
+				menu.classList.remove('active');
+				hamburger.setAttribute('aria-expanded', 'false');
+				document.body.style.overflow = '';
+			});
+		});
+
+		// Close menu on escape key
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && menu.classList.contains('active')) {
+				hamburger.classList.remove('active');
+				menu.classList.remove('active');
+				hamburger.setAttribute('aria-expanded', 'false');
+				document.body.style.overflow = '';
+			}
+		});
+
+		// Close menu when clicking outside
+		document.addEventListener('click', (e) => {
+			if (menu.classList.contains('active') &&
+				!menu.contains(e.target) &&
+				!hamburger.contains(e.target)) {
+				hamburger.classList.remove('active');
+				menu.classList.remove('active');
+				hamburger.setAttribute('aria-expanded', 'false');
+				document.body.style.overflow = '';
+			}
+		});
+	}
+
+	// =====================================================
+	// BACK TO TOP BUTTON
+	// =====================================================
+	function initBackToTop() {
+		const btn = document.createElement('button');
+		btn.className = 'back-to-top';
+		btn.setAttribute('aria-label', 'Retour en haut');
+		btn.innerHTML = '&#8593;';
+		document.body.appendChild(btn);
+
+		window.addEventListener('scroll', () => {
+			if (window.scrollY > 300) {
+				btn.classList.add('visible');
+			} else {
+				btn.classList.remove('visible');
+			}
+		});
+
+		btn.addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
+	}
+
 	// Initialize when DOM is ready
 	function init() {
 		initAnalytics();
 		setYear();
 		initFadeInAnimations();
+		initMobileMenu();
+		initBackToTop();
 		initCarousels();
 		initLightbox();
 	}

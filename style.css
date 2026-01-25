@@ -95,7 +95,9 @@ img {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
 	padding: var(--spacing-sm) 0;
+	position: relative;
 }
 
 .left {
@@ -723,4 +725,318 @@ button:hover {
 	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
 	border: 0;
+}
+
+/* =====================================================
+   HAMBURGER MENU
+   ===================================================== */
+
+.hamburger {
+	display: none;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 28px;
+	height: 20px;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	z-index: 100;
+}
+
+/* Remove default button styles and focus outline */
+.hamburger:focus {
+	outline: none;
+}
+
+.hamburger:focus-visible {
+	outline: 2px solid var(--color-accent);
+	outline-offset: 4px;
+}
+
+.hamburger span {
+	display: block;
+	width: 100%;
+	height: 2px;
+	background-color: var(--color-text);
+	border-radius: 2px;
+	transition: transform var(--transition), opacity var(--transition), background-color var(--transition);
+}
+
+.hamburger.active span {
+	background-color: var(--color-text);
+}
+
+.hamburger.active span:nth-child(1) {
+	transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+	opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+	transform: translateY(-9px) rotate(-45deg);
+}
+
+@media screen and (max-width: 768px) {
+	.hamburger {
+		display: flex;
+		position: absolute;
+		right: var(--spacing-sm);
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.menu {
+		position: fixed;
+		top: 0;
+		right: -100%;
+		width: 70%;
+		max-width: 300px;
+		height: 100vh;
+		background-color: var(--color-surface);
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing-md);
+		transition: right var(--transition);
+		box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+		z-index: 99;
+	}
+
+	.menu.active {
+		right: 0;
+	}
+
+	.menu-link {
+		font-size: 1.5rem;
+	}
+
+	/* Social icons in mobile menu */
+	.menu .mobile-social {
+		display: flex;
+		gap: var(--spacing-sm);
+		margin-top: var(--spacing-md);
+		padding-top: var(--spacing-md);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.menu .mobile-social .social-icon {
+		height: 2rem;
+	}
+
+	/* Hide desktop social on mobile */
+	.social {
+		display: none;
+	}
+
+	/* Hide lang selector in header on mobile */
+	.header > .right > .lang-selector {
+		display: none;
+	}
+
+	/* Mobile lang selector in menu */
+	.menu .mobile-lang {
+		display: flex;
+		gap: 0.5rem;
+		font-family: var(--font-display);
+		font-size: 1rem;
+		margin-top: var(--spacing-sm);
+	}
+
+	.menu .mobile-lang a {
+		padding: 0.25rem 0.75rem;
+		border-radius: var(--border-radius);
+	}
+
+	.menu .mobile-lang a:hover,
+	.menu .mobile-lang a.active {
+		background-color: var(--color-accent);
+		color: white;
+	}
+}
+
+/* =====================================================
+   BACK TO TOP BUTTON
+   ===================================================== */
+
+.back-to-top {
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background-color: var(--color-accent);
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(20px);
+	transition: opacity var(--transition), visibility var(--transition), transform var(--transition), background-color var(--transition-fast);
+	z-index: 50;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top.visible {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.back-to-top:hover {
+	background-color: var(--color-primary);
+	transform: translateY(-3px);
+}
+
+.back-to-top:focus {
+	outline: none;
+}
+
+.back-to-top:focus-visible {
+	outline: 2px solid white;
+	outline-offset: 2px;
+}
+
+@media screen and (max-width: 768px) {
+	.back-to-top {
+		bottom: 20px;
+		right: 20px;
+		width: 45px;
+		height: 45px;
+		font-size: 1.2rem;
+	}
+}
+
+/* =====================================================
+   CAROUSEL INDICATORS
+   ===================================================== */
+
+.carousel-indicators {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	margin-top: var(--spacing-sm);
+	padding: var(--spacing-xs) 0;
+}
+
+.carousel-dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: var(--color-muted);
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.carousel-dot:hover {
+	background-color: var(--color-text);
+	transform: scale(1.2);
+}
+
+.carousel-dot.active {
+	background-color: var(--color-accent);
+	transform: scale(1.3);
+}
+
+/* =====================================================
+   LIGHTBOX ZOOM
+   ===================================================== */
+
+.lightbox-image-container {
+	position: relative;
+	max-width: 90vw;
+	max-height: 80vh;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.lightbox-image {
+	transition: transform 0.2s ease;
+}
+
+.lightbox-zoom-controls {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	background: rgba(0, 0, 0, 0.6);
+	padding: 8px 15px;
+	border-radius: 25px;
+	z-index: 10;
+}
+
+.lightbox-zoom-in,
+.lightbox-zoom-out {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.2);
+	border: none;
+	color: white;
+	font-size: 1.2rem;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background var(--transition-fast);
+	margin: 0;
+	padding: 0;
+}
+
+.lightbox-zoom-in:hover,
+.lightbox-zoom-out:hover {
+	background: rgba(255, 255, 255, 0.4);
+}
+
+.lightbox-zoom-level {
+	color: white;
+	font-family: var(--font-display);
+	font-size: 0.9rem;
+	min-width: 50px;
+	text-align: center;
+}
+
+.lightbox-counter {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	color: white;
+	font-family: var(--font-display);
+	font-size: 0.9rem;
+	background: rgba(0, 0, 0, 0.5);
+	padding: 5px 12px;
+	border-radius: 15px;
+}
+
+@media screen and (max-width: 768px) {
+	.lightbox-zoom-controls {
+		bottom: 80px;
+		padding: 6px 12px;
+	}
+
+	.lightbox-zoom-in,
+	.lightbox-zoom-out {
+		width: 30px;
+		height: 30px;
+		font-size: 1rem;
+	}
+
+	.lightbox-counter {
+		bottom: 80px;
+		right: 10px;
+	}
 }
