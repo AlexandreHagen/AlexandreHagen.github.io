@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="i18n-loading">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,80 +60,80 @@
 <body>
 	<header class="header">
 		<a href="index.html">
-			<img class="left" src="assets/logos/GaryLogoFrame.svg" alt="Gary Sculpteur Logo" width="143" height="150">
+			<img class="left" src="assets/logos/GaryLogoFrame.svg" data-i18n-alt="alt.logo" alt="Gary Sculpteur Logo" width="143" height="150">
 		</a>
 		<div class="right">
 			<div class="lang-selector">
-				<a href="/press.html" class="active" aria-label="English version">EN</a>
+				<button class="lang-btn" data-lang="en" data-i18n-aria="aria.lang.en">EN</button>
 				<span class="lang-separator">|</span>
-				<a href="/fr/press.html" aria-label="Version française">FR</a>
+				<button class="lang-btn" data-lang="fr" data-i18n-aria="aria.lang.fr">FR</button>
 			</div>
 			<div class="social">
-				<a href="https://www.instagram.com/garysculpteur/" target="_blank" rel="noopener noreferrer" aria-label="Follow Gary on Instagram">
+				<a href="https://www.instagram.com/garysculpteur/" target="_blank" rel="noopener noreferrer" data-i18n-aria="aria.instagram">
 					<img class="social-icon" src="assets/logos/social/Instagram.svg" alt="Instagram" width="35" height="35">
 				</a>
-				<a href="https://www.artmajeur.com/gary-11" target="_blank" rel="noopener noreferrer" aria-label="View Gary's gallery on Artmajeur">
+				<a href="https://www.artmajeur.com/gary-11" target="_blank" rel="noopener noreferrer" data-i18n-aria="aria.artmajeur">
 					<img class="social-icon" src="assets/logos/social/artmajeur.png" alt="Artmajeur" width="35" height="35">
 				</a>
-				<a href="https://www.facebook.com/sculpteur.gary" target="_blank" rel="noopener noreferrer" aria-label="Follow Gary on Facebook">
+				<a href="https://www.facebook.com/sculpteur.gary" target="_blank" rel="noopener noreferrer" data-i18n-aria="aria.facebook">
 					<img class="social-icon" src="assets/logos/social/Facebook.svg" alt="Facebook" width="35" height="35">
 				</a>
-				<a href="https://fr.linkedin.com/in/gary-sculpteur-571846a1" target="_blank" rel="noopener noreferrer" aria-label="Connect with Gary on LinkedIn">
+				<a href="https://fr.linkedin.com/in/gary-sculpteur-571846a1" target="_blank" rel="noopener noreferrer" data-i18n-aria="aria.linkedin">
 					<img class="social-icon" src="assets/logos/social/Linkedin.svg" alt="LinkedIn" width="35" height="35">
 				</a>
 			</div>
-			<nav class="menu" aria-label="Main navigation">
-				<a class="menu-link" href="index.html#gallery">GALLERY</a>
-				<a class="menu-link" href="index.html#about">ABOUT</a>
-				<a class="menu-link" href="contact.html">CONTACT</a>
+			<nav class="menu" data-i18n-aria="aria.menu">
+				<a class="menu-link" href="index.html#gallery" data-i18n="nav.gallery">GALLERY</a>
+				<a class="menu-link" href="index.html#about" data-i18n="nav.about">ABOUT</a>
+				<a class="menu-link" href="contact.html" data-i18n="nav.contact">CONTACT</a>
 			</nav>
 		</div>
 	</header>
 
-	<img class="banner" src="assets/photo/gary/banner_gary.jpg" alt="Gary sculptor artist portrait" width="1920" height="400" loading="eager" fetchpriority="high">
+	<img class="banner" src="assets/photo/gary/banner_gary.jpg" data-i18n-alt="alt.banner.gary" alt="Gary sculptor artist portrait" width="1920" height="400" loading="eager" fetchpriority="high">
 
 	<main>
 		<!-- Videos Section -->
 		<section class="section fade-in">
-			<h1 class="title">VIDEOS</h1>
+			<h1 class="title" data-i18n="press.videos">VIDEOS</h1>
 			<div class="videos-grid">
 				<div>
 					<div class="video-card">
 						<iframe src="https://www.youtube.com/embed/I_jyaJNzdA8" title="Gary sculpteur - Carré des Jardiniers Paysalia" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
 					</div>
-					<p class="video-title">Gary at the Carré des Jardiniers - Paysalia</p>
+					<p class="video-title" data-i18n="press.video1.title">Gary at the Carré des Jardiniers - Paysalia</p>
 				</div>
 				<div>
 					<div class="video-card">
 						<iframe src="https://www.youtube.com/embed/E9hTWzOX0lY?start=481" title="Membre du jury du Carré des Jardiniers" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
 					</div>
-					<p class="video-title">Jury member - Carré des Jardiniers</p>
+					<p class="video-title" data-i18n="press.video2.title">Jury member - Carré des Jardiniers</p>
 				</div>
 			</div>
 		</section>
 
 		<!-- Press Articles Section -->
 		<section class="section fade-in">
-			<h1 class="title">PRESS</h1>
+			<h1 class="title" data-i18n="press.articles">PRESS</h1>
 			<div class="press-grid">
 				<a href="https://www.paysalia.com/fr/blog/metier/carre-jardiniers/artiste-gary-trophee" target="_blank" rel="noopener noreferrer" class="press-card">
 					<span class="press-card-title">Paysalia</span>
-					<span class="press-card-desc">Carré des Jardiniers Trophy</span>
+					<span class="press-card-desc" data-i18n="press.article1.desc">Carré des Jardiniers Trophy</span>
 				</a>
 				<a href="https://www.paysalia.com/en/blog/expertise/landscaping-senses-touch-sensory-garden" target="_blank" rel="noopener noreferrer" class="press-card">
 					<span class="press-card-title">Paysalia</span>
-					<span class="press-card-desc">Landscaping the senses - Sensory garden</span>
+					<span class="press-card-desc" data-i18n="press.article2.desc">Landscaping the senses - Sensory garden</span>
 				</a>
 				<a href="assets/chaumont-sur-loire-festival-jardins.pdf" target="_blank" rel="noopener noreferrer" class="press-card">
 					<span class="press-card-title">Chaumont-sur-Loire</span>
-					<span class="press-card-desc">International Garden Festival</span>
+					<span class="press-card-desc" data-i18n="press.article3.desc">International Garden Festival</span>
 				</a>
 			</div>
 		</section>
 
 		<!-- Collaborations Section -->
 		<section class="section fade-in">
-			<h1 class="title">COLLABORATIONS</h1>
+			<h1 class="title" data-i18n="press.collaborations">COLLABORATIONS</h1>
 			<div class="partners-grid">
 				<a href="https://www.paysalia.com/fr" target="_blank" rel="noopener noreferrer" class="partner-card">
 					<img src="https://www.google.com/s2/favicons?domain=paysalia.com&sz=128" alt="Paysalia">
@@ -179,10 +179,10 @@
 	</main>
 
 	<footer class="footer">
-		<a href="contact.html?quote=true#form" class="footer-cta">Request a quote</a>
-		<nav aria-label="Footer navigation">
-			<a class="footer-link" href="press.html">PRESS</a>
-			<a class="footer-link" href="contact.html">CONTACT</a>
+		<a href="contact.html?quote=true#form" class="footer-cta" data-i18n="footer.quote">Request a quote</a>
+		<nav data-i18n-aria="aria.footer">
+			<a class="footer-link" href="press.html" data-i18n="nav.press">PRESS</a>
+			<a class="footer-link" href="contact.html" data-i18n="nav.contact">CONTACT</a>
 		</nav>
 		<div>
 			&copy; <span id="year"></span>

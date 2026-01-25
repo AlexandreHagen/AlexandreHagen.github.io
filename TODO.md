@@ -43,11 +43,12 @@
 - [x] **Formulaire AJAX** - Validation temps reel + envoi sans rechargement
 - [ ] **Analytics evenements** - Tracker clics lightbox, temps passe, scroll depth
 - [ ] **Sitemap dynamique** - Generer automatiquement a partir des oeuvres
+- [x] **Systeme i18n** - Fichiers de traduction JSON au lieu de pages dupliquees
 
 ---
 
 ## Fait
-- [x] Structure bilingue FR/EN
+- [x] Structure bilingue FR/EN (systeme i18n avec JSON)
 - [x] Carousel CSS natif avec autoplay
 - [x] Lightbox pour voir les oeuvres en grand
 - [x] Schema.org JSON-LD pour SEO
@@ -62,3 +63,4 @@
 - [x] Menu hamburger mobile (avec reseaux sociaux)
 - [x] Bouton retour en haut
 - [x] Lazy loading lightbox (prechargement images adjacentes)
+- [x] Systeme i18n centralise (JSON EN/FR, detection langue auto, localStorage, ?lang= param)

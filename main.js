@@ -1,6 +1,6 @@
 /**
  * Gary Sculpteur - Main JavaScript
- * Carousel, lightbox, animations and utilities
+ * Carousel, lightbox, animations, utilities and i18n
  */
 
 (function() {
@@ -12,6 +12,204 @@
 	const CONFIG = {
 		GA_MEASUREMENT_ID: 'G-XXXXXXXXXX' // Remplacer par ton ID GA4
 	};
+
+	// =====================================================
+	// i18n - Internationalization Module
+	// =====================================================
+	const i18n = {
+		translations: {},
+		currentLang: 'en',
+
+		async init() {
+			this.currentLang = this.detectLanguage();
+			await this.loadTranslations(this.currentLang);
+			this.translatePage();
+			this.initLanguageSelector();
+		},
+
+		detectLanguage() {
+			// 1. URL param ?lang=fr
+			const urlParams = new URLSearchParams(window.location.search);
+			const urlLang = urlParams.get('lang');
+			if (urlLang && ['en', 'fr'].includes(urlLang)) {
+				localStorage.setItem('lang', urlLang);
+				return urlLang;
+			}
+
+			// 2. localStorage preference
+			const stored = localStorage.getItem('lang');
+			if (stored && ['en', 'fr'].includes(stored)) return stored;
+
+			// 3. Browser language
+			const browserLang = navigator.language.slice(0, 2);
+			return ['fr', 'en'].includes(browserLang) ? browserLang : 'en';
+		},
+
+		async loadTranslations(lang) {
+			try {
+				const response = await fetch(`assets/i18n/${lang}.json`);
+				if (!response.ok) throw new Error('Translation file not found');
+				this.translations = await response.json();
+			} catch (error) {
+				console.warn('i18n: Could not load translations for', lang, error);
+				// Fallback to English if French fails
+				if (lang !== 'en') {
+					return this.loadTranslations('en');
+				}
+			}
+		},
+
+		t(key, fallback = '') {
+			return this.translations[key] || fallback;
+		},
+
+		translatePage() {
+			// Text content with data-i18n
+			document.querySelectorAll('[data-i18n]').forEach(el => {
+				const key = el.dataset.i18n;
+				const translation = this.t(key);
+				if (translation) {
+					if (el.dataset.i18nHtml !== undefined) {
+						el.innerHTML = translation;
+					} else {
+						el.textContent = translation;
+					}
+				}
+			});
+
+			// Alt attributes
+			document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+				const translation = this.t(el.dataset.i18nAlt);
+				if (translation) el.alt = translation;
+			});
+
+			// Placeholder attributes
+			document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+				const translation = this.t(el.dataset.i18nPlaceholder);
+				if (translation) el.placeholder = translation;
+			});
+
+			// Aria-label attributes
+			document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+				const translation = this.t(el.dataset.i18nAria);
+				if (translation) el.setAttribute('aria-label', translation);
+			});
+
+			// Title attributes
+			document.querySelectorAll('[data-i18n-title]').forEach(el => {
+				const translation = this.t(el.dataset.i18nTitle);
+				if (translation) el.title = translation;
+			});
+
+			// Update html lang attribute
+			document.documentElement.lang = this.currentLang;
+
+			// Translate meta tags
+			this.translateMeta();
+
+			// Update hreflang links
+			this.updateHreflang();
+		},
+
+		translateMeta() {
+			// Determine page type from URL
+			const path = window.location.pathname;
+			let pageType = 'home';
+			if (path.includes('contact')) pageType = 'contact';
+			else if (path.includes('press')) pageType = 'press';
+
+			// Title
+			const title = this.t(`meta.${pageType}.title`);
+			if (title) document.title = title;
+
+			// Description
+			const desc = document.querySelector('meta[name="description"]');
+			const description = this.t(`meta.${pageType}.description`);
+			if (desc && description) desc.content = description;
+
+			// Open Graph
+			const ogTitle = document.querySelector('meta[property="og:title"]');
+			const ogTitleText = this.t(`og.${pageType}.title`);
+			if (ogTitle && ogTitleText) ogTitle.content = ogTitleText;
+
+			const ogDesc = document.querySelector('meta[property="og:description"]');
+			const ogDescText = this.t(`og.${pageType}.description`);
+			if (ogDesc && ogDescText) ogDesc.content = ogDescText;
+
+			// Twitter
+			const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+			if (twitterTitle && ogTitleText) twitterTitle.content = ogTitleText;
+
+			const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+			const twitterDescText = this.t(`twitter.${pageType}.description`);
+			if (twitterDesc && twitterDescText) twitterDesc.content = twitterDescText;
+		},
+
+		updateHreflang() {
+			const currentUrl = window.location.origin + window.location.pathname;
+			const baseUrl = currentUrl.replace(/\?.*$/, '');
+
+			// Update or create hreflang links
+			let enLink = document.querySelector('link[hreflang="en"]');
+			let frLink = document.querySelector('link[hreflang="fr"]');
+			let defaultLink = document.querySelector('link[hreflang="x-default"]');
+
+			const enUrl = baseUrl + '?lang=en';
+			const frUrl = baseUrl + '?lang=fr';
+
+			if (enLink) enLink.href = enUrl;
+			if (frLink) frLink.href = frUrl;
+			if (defaultLink) defaultLink.href = baseUrl;
+
+			// Update canonical
+			const canonical = document.querySelector('link[rel="canonical"]');
+			if (canonical) {
+				canonical.href = this.currentLang === 'fr' ? frUrl : enUrl;
+			}
+
+			// Update OG URL
+			const ogUrl = document.querySelector('meta[property="og:url"]');
+			if (ogUrl) {
+				ogUrl.content = this.currentLang === 'fr' ? frUrl : enUrl;
+			}
+		},
+
+		initLanguageSelector() {
+			document.querySelectorAll('.lang-btn').forEach(btn => {
+				const lang = btn.dataset.lang;
+
+				// Set active state
+				if (lang === this.currentLang) {
+					btn.classList.add('active');
+				} else {
+					btn.classList.remove('active');
+				}
+
+				// Prevent duplicate listeners
+				if (!btn.dataset.i18nInit) {
+					btn.dataset.i18nInit = 'true';
+					btn.addEventListener('click', (e) => {
+						e.preventDefault();
+						this.setLanguage(lang);
+					});
+				}
+			});
+		},
+
+		setLanguage(lang) {
+			if (lang === this.currentLang) return;
+
+			localStorage.setItem('lang', lang);
+
+			// Update URL with lang parameter and reload
+			const url = new URL(window.location);
+			url.searchParams.set('lang', lang);
+			window.location.href = url.toString();
+		}
+	};
+
+	// Make i18n accessible globally for other scripts
+	window.i18n = i18n;
 
 	// Google Analytics 4
 	function initAnalytics() {
@@ -87,15 +285,15 @@
 			this.overlay = document.createElement('div');
 			this.overlay.className = 'lightbox';
 			this.overlay.innerHTML = `
-				<button class="lightbox-close" aria-label="Fermer">&times;</button>
-				<button class="lightbox-prev" aria-label="Precedent">&#10094;</button>
-				<button class="lightbox-next" aria-label="Suivant">&#10095;</button>
+				<button class="lightbox-close" aria-label="${i18n.t('lightbox.close', 'Close')}">&times;</button>
+				<button class="lightbox-prev" aria-label="${i18n.t('lightbox.prev', 'Previous')}">&#10094;</button>
+				<button class="lightbox-next" aria-label="${i18n.t('lightbox.next', 'Next')}">&#10095;</button>
 				<div class="lightbox-content">
 					<div class="lightbox-image-container">
 						<img class="lightbox-image" src="" alt="">
 					</div>
 					<div class="lightbox-caption"></div>
-					<a href="contact.html" class="lightbox-cta" data-en="Request a quote" data-fr="Demander un devis"></a>
+					<a href="contact.html?quote=true#form" class="lightbox-cta">${i18n.t('lightbox.quote', 'Request a quote')}</a>
 					<div class="lightbox-counter"></div>
 				</div>
 			`;
@@ -109,12 +307,6 @@
 			this.prevBtn = this.overlay.querySelector('.lightbox-prev');
 			this.nextBtn = this.overlay.querySelector('.lightbox-next');
 			this.ctaBtn = this.overlay.querySelector('.lightbox-cta');
-
-			// Set CTA text based on page language
-			const lang = document.documentElement.lang || 'en';
-			const isFrench = lang.startsWith('fr');
-			this.ctaBtn.textContent = isFrench ? this.ctaBtn.dataset.fr : this.ctaBtn.dataset.en;
-			this.ctaBtn.href = isFrench ? '/fr/contact.html?quote=true#form' : '/contact.html?quote=true#form';
 		}
 
 		bindEvents() {
@@ -443,12 +635,12 @@
 			this.prevBtn = document.createElement('button');
 			this.prevBtn.className = 'carousel-btn carousel-prev';
 			this.prevBtn.innerHTML = '&#10094;';
-			this.prevBtn.setAttribute('aria-label', 'Previous slide');
+			this.prevBtn.setAttribute('aria-label', i18n.t('carousel.prev', 'Previous slide'));
 
 			this.nextBtn = document.createElement('button');
 			this.nextBtn.className = 'carousel-btn carousel-next';
 			this.nextBtn.innerHTML = '&#10095;';
-			this.nextBtn.setAttribute('aria-label', 'Next slide');
+			this.nextBtn.setAttribute('aria-label', i18n.t('carousel.next', 'Next slide'));
 
 			this.carousel.appendChild(this.prevBtn);
 			this.carousel.appendChild(this.nextBtn);
@@ -461,7 +653,7 @@
 			for (let i = 0; i < this.itemCount; i++) {
 				const dot = document.createElement('button');
 				dot.className = 'carousel-dot';
-				dot.setAttribute('aria-label', `Aller a l'image ${i + 1}`);
+				dot.setAttribute('aria-label', `${i18n.t('carousel.goto', 'Go to image')} ${i + 1}`);
 				dot.addEventListener('click', (e) => {
 					e.stopPropagation();
 					this.goTo(i);
@@ -689,7 +881,7 @@
 	function initBackToTop() {
 		const btn = document.createElement('button');
 		btn.className = 'back-to-top';
-		btn.setAttribute('aria-label', 'Retour en haut');
+		btn.setAttribute('aria-label', i18n.t('aria.back.top', 'Back to top'));
 		btn.innerHTML = '&#8593;';
 		document.body.appendChild(btn);
 
@@ -713,26 +905,21 @@
 		const form = document.querySelector('.contact-form');
 		if (!form) return;
 
-		const lang = document.documentElement.lang || 'en';
-		const isFrench = lang.startsWith('fr');
-
 		// Pre-fill message if coming from quote CTA
 		const urlParams = new URLSearchParams(window.location.search);
 		if (urlParams.get('quote') === 'true') {
 			const messageField = form.querySelector('#message');
 			if (messageField) {
-				const quoteMessage = isFrench
-					? 'Bonjour,\n\nJe souhaite demander un devis pour une sculpture.\n\n'
-					: 'Hello,\n\nI would like to request a quote for a sculpture.\n\n';
+				const quoteMessage = i18n.t('contact.quote.prefill', 'Hello,\n\nI would like to request a quote for a sculpture.\n\n');
 				messageField.value = quoteMessage;
 			}
 		}
 
 		const messages = {
-			sending: isFrench ? 'Envoi en cours...' : 'Sending...',
-			success: isFrench ? 'Message envoyé ! Nous vous répondrons rapidement.' : 'Message sent! We\'ll get back to you soon.',
-			error: isFrench ? 'Erreur lors de l\'envoi. Veuillez réessayer.' : 'Error sending message. Please try again.',
-			submit: isFrench ? 'Envoyer' : 'Send'
+			sending: i18n.t('contact.sending', 'Sending...'),
+			success: i18n.t('contact.success', 'Message sent! We\'ll get back to you soon.'),
+			error: i18n.t('contact.error', 'Error sending message. Please try again.'),
+			submit: i18n.t('contact.send', 'Send')
 		};
 
 		const submitBtn = form.querySelector('button[type="submit"]');
@@ -816,7 +1003,10 @@
 	}
 
 	// Initialize when DOM is ready
-	function init() {
+	async function init() {
+		// Load i18n first (critical for translated content)
+		await i18n.init();
+
 		initAnalytics();
 		setYear();
 		initFadeInAnimations();
@@ -825,6 +1015,9 @@
 		initContactForm();
 		initCarousels();
 		initLightbox();
+
+		// Remove loading state to reveal content
+		document.documentElement.classList.remove('i18n-loading');
 	}
 
 	if (document.readyState === 'loading') {
