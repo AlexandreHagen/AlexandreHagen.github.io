@@ -40,7 +40,7 @@
 - [ ] **Pop-up sortie** - Capturer les emails avant depart
 
 ## Technique Avancee
-- [ ] **Formulaire AJAX** - Validation temps reel + envoi sans rechargement
+- [x] **Formulaire AJAX** - Validation temps reel + envoi sans rechargement
 - [ ] **Analytics evenements** - Tracker clics lightbox, temps passe, scroll depth
 - [ ] **Sitemap dynamique** - Generer automatiquement a partir des oeuvres
 

@@ -705,6 +705,103 @@
 		});
 	}
 
+	// =====================================================
+	// CONTACT FORM (AJAX)
+	// =====================================================
+	function initContactForm() {
+		const form = document.querySelector('.contact-form');
+		if (!form) return;
+
+		const lang = document.documentElement.lang || 'en';
+		const isFrench = lang.startsWith('fr');
+
+		const messages = {
+			sending: isFrench ? 'Envoi en cours...' : 'Sending...',
+			success: isFrench ? 'Message envoyé ! Nous vous répondrons rapidement.' : 'Message sent! We\'ll get back to you soon.',
+			error: isFrench ? 'Erreur lors de l\'envoi. Veuillez réessayer.' : 'Error sending message. Please try again.',
+			submit: isFrench ? 'Envoyer' : 'Send'
+		};
+
+		const submitBtn = form.querySelector('button[type="submit"]');
+		const originalBtnText = submitBtn.textContent;
+
+		// Create message container
+		const messageDiv = document.createElement('div');
+		messageDiv.className = 'form-message';
+		form.appendChild(messageDiv);
+
+		// Real-time validation
+		form.querySelectorAll('input, textarea').forEach(field => {
+			field.addEventListener('blur', () => validateField(field));
+			field.addEventListener('input', () => {
+				if (field.classList.contains('invalid')) {
+					validateField(field);
+				}
+			});
+		});
+
+		function validateField(field) {
+			if (!field.checkValidity()) {
+				field.classList.add('invalid');
+				return false;
+			} else {
+				field.classList.remove('invalid');
+				return true;
+			}
+		}
+
+		function validateForm() {
+			let isValid = true;
+			form.querySelectorAll('input, textarea').forEach(field => {
+				if (!validateField(field)) isValid = false;
+			});
+			return isValid;
+		}
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			if (!validateForm()) return;
+
+			// Show loading state
+			submitBtn.disabled = true;
+			submitBtn.textContent = messages.sending;
+			messageDiv.className = 'form-message';
+			messageDiv.textContent = '';
+
+			try {
+				// Check if running locally (test mode)
+				const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+				if (isLocal) {
+					// Simulate sending in test mode
+					await new Promise(resolve => setTimeout(resolve, 1000));
+					console.log('TEST MODE - Form data:', Object.fromEntries(new FormData(form)));
+				} else {
+					const response = await fetch(form.action, {
+						method: 'POST',
+						body: new FormData(form),
+						headers: { 'Accept': 'application/json' }
+					});
+
+					if (!response.ok) {
+						throw new Error('Server error');
+					}
+				}
+
+				messageDiv.className = 'form-message success';
+				messageDiv.textContent = messages.success;
+				form.reset();
+			} catch (error) {
+				messageDiv.className = 'form-message error';
+				messageDiv.textContent = messages.error;
+			} finally {
+				submitBtn.disabled = false;
+				submitBtn.textContent = originalBtnText;
+			}
+		});
+	}
+
 	// Initialize when DOM is ready
 	function init() {
 		initAnalytics();
@@ -712,6 +809,7 @@
 		initFadeInAnimations();
 		initMobileMenu();
 		initBackToTop();
+		initContactForm();
 		initCarousels();
 		initLightbox();
 	}
