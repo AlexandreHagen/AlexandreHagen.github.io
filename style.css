@@ -78,15 +78,13 @@ img {
 @font-face {
 	font-family: 'Adam';
 	font-display: swap;
-	src: url('assets/fonts/Adam.woff2') format('woff2'),
-	     url('assets/fonts/Adam.otf') format('opentype');
+	src: url('assets/fonts/Adam.otf') format('opentype');
 }
 
 @font-face {
 	font-family: 'Lato';
 	font-display: swap;
-	src: url('assets/fonts/Lato-Thin.woff2') format('woff2'),
-	     url('assets/fonts/Lato-Thin.ttf') format('truetype');
+	src: url('assets/fonts/Lato-Thin.ttf') format('truetype');
 }
 
 /* =====================================================
