@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+	<!-- English Pages -->
+	<url>
+		<loc>https://gary-sculpteur.com/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://gary-sculpteur.com/"/>
+		<xhtml:link rel="alternate" hreflang="fr" href="https://gary-sculpteur.com/fr/"/>
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://gary-sculpteur.com/"/>
+		<changefreq>monthly</changefreq>
+		<priority>1.0</priority>
+	</url>
+
+	<url>
+		<loc>https://gary-sculpteur.com/contact.html</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://gary-sculpteur.com/contact.html"/>
+		<xhtml:link rel="alternate" hreflang="fr" href="https://gary-sculpteur.com/fr/contact.html"/>
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://gary-sculpteur.com/contact.html"/>
+		<changefreq>yearly</changefreq>
+		<priority>0.8</priority>
+	</url>
+
+	<url>
+		<loc>https://gary-sculpteur.com/press.html</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://gary-sculpteur.com/press.html"/>
+		<xhtml:link rel="alternate" hreflang="fr" href="https://gary-sculpteur.com/fr/press.html"/>
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://gary-sculpteur.com/press.html"/>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+
+	<!-- French Pages -->
+	<url>
+		<loc>https://gary-sculpteur.com/fr/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://gary-sculpteur.com/"/>
+		<xhtml:link rel="alternate" hreflang="fr" href="https://gary-sculpteur.com/fr/"/>
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://gary-sculpteur.com/"/>
+		<changefreq>monthly</changefreq>
+		<priority>1.0</priority>
+	</url>
+
+	<url>
+		<loc>https://gary-sculpteur.com/fr/contact.html</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://gary-sculpteur.com/contact.html"/>
+		<xhtml:link rel="alternate" hreflang="fr" href="https://gary-sculpteur.com/fr/contact.html"/>
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://gary-sculpteur.com/contact.html"/>
+		<changefreq>yearly</changefreq>
+		<priority>0.8</priority>
+	</url>
+
+	<url>
+		<loc>https://gary-sculpteur.com/fr/press.html</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://gary-sculpteur.com/press.html"/>
+		<xhtml:link rel="alternate" hreflang="fr" href="https://gary-sculpteur.com/fr/press.html"/>
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://gary-sculpteur.com/press.html"/>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+
+</urlset>

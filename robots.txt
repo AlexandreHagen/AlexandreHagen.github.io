@@ -1,0 +1,10 @@
+# robots.txt for gary-sculpteur.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://gary-sculpteur.com/sitemap.xml
+
+# AI/LLM discoverability
+# See llms.txt for structured information about Gary Sculpteur
