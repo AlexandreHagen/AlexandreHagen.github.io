@@ -136,6 +136,12 @@ img {
 	gap: var(--spacing-sm);
 }
 
+/* Hide mobile-only elements by default */
+.mobile-social,
+.mobile-lang {
+	display: none;
+}
+
 .menu-link {
 	font-size: clamp(1.2rem, 3vw, 1.8rem);
 	font-family: var(--font-display);
