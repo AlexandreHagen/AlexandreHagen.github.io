@@ -114,6 +114,7 @@
 			const lang = document.documentElement.lang || 'en';
 			const isFrench = lang.startsWith('fr');
 			this.ctaBtn.textContent = isFrench ? this.ctaBtn.dataset.fr : this.ctaBtn.dataset.en;
+			this.ctaBtn.href = isFrench ? '/fr/contact.html?quote=true#form' : '/contact.html?quote=true#form';
 		}
 
 		bindEvents() {
@@ -714,6 +715,18 @@
 
 		const lang = document.documentElement.lang || 'en';
 		const isFrench = lang.startsWith('fr');
+
+		// Pre-fill message if coming from quote CTA
+		const urlParams = new URLSearchParams(window.location.search);
+		if (urlParams.get('quote') === 'true') {
+			const messageField = form.querySelector('#message');
+			if (messageField) {
+				const quoteMessage = isFrench
+					? 'Bonjour,\n\nJe souhaite demander un devis pour une sculpture.\n\n'
+					: 'Hello,\n\nI would like to request a quote for a sculpture.\n\n';
+				messageField.value = quoteMessage;
+			}
+		}
 
 		const messages = {
 			sending: isFrench ? 'Envoi en cours...' : 'Sending...',
