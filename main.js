@@ -95,12 +95,8 @@
 						<img class="lightbox-image" src="" alt="">
 					</div>
 					<div class="lightbox-caption"></div>
+					<a href="contact.html" class="lightbox-cta" data-en="Request a quote" data-fr="Demander un devis"></a>
 					<div class="lightbox-counter"></div>
-				</div>
-				<div class="lightbox-zoom-controls">
-					<button class="lightbox-zoom-out" aria-label="Zoom arriere">−</button>
-					<span class="lightbox-zoom-level">100%</span>
-					<button class="lightbox-zoom-in" aria-label="Zoom avant">+</button>
 				</div>
 			`;
 			document.body.appendChild(this.overlay);
@@ -112,17 +108,18 @@
 			this.closeBtn = this.overlay.querySelector('.lightbox-close');
 			this.prevBtn = this.overlay.querySelector('.lightbox-prev');
 			this.nextBtn = this.overlay.querySelector('.lightbox-next');
-			this.zoomInBtn = this.overlay.querySelector('.lightbox-zoom-in');
-			this.zoomOutBtn = this.overlay.querySelector('.lightbox-zoom-out');
-			this.zoomLevel = this.overlay.querySelector('.lightbox-zoom-level');
+			this.ctaBtn = this.overlay.querySelector('.lightbox-cta');
+
+			// Set CTA text based on page language
+			const lang = document.documentElement.lang || 'en';
+			const isFrench = lang.startsWith('fr');
+			this.ctaBtn.textContent = isFrench ? this.ctaBtn.dataset.fr : this.ctaBtn.dataset.en;
 		}
 
 		bindEvents() {
 			this.closeBtn.addEventListener('click', () => this.close());
 			this.prevBtn.addEventListener('click', () => this.prev());
 			this.nextBtn.addEventListener('click', () => this.next());
-			this.zoomInBtn.addEventListener('click', () => this.zoom(0.5));
-			this.zoomOutBtn.addEventListener('click', () => this.zoom(-0.5));
 
 			this.overlay.addEventListener('click', (e) => {
 				if (e.target === this.overlay) {
@@ -274,7 +271,6 @@
 			}
 
 			this.updateTransform();
-			this.zoomLevel.textContent = `${Math.round(this.scale * 100)}%`;
 			this.image.style.cursor = this.scale > 1 ? 'grab' : 'default';
 		}
 
@@ -283,7 +279,6 @@
 			this.panX = 0;
 			this.panY = 0;
 			this.updateTransform();
-			this.zoomLevel.textContent = '100%';
 			this.image.style.cursor = 'default';
 		}
 
@@ -317,6 +312,29 @@
 			const showNav = this.currentImages.length > 1;
 			this.prevBtn.style.display = showNav ? 'flex' : 'none';
 			this.nextBtn.style.display = showNav ? 'flex' : 'none';
+
+			// Preload adjacent images
+			this.preloadAdjacentImages();
+		}
+
+		preloadAdjacentImages() {
+			if (this.currentImages.length <= 1) return;
+
+			// Preload next image
+			const nextIndex = (this.currentIndex + 1) % this.currentImages.length;
+			const nextItem = this.currentImages[nextIndex];
+			if (nextItem && nextItem.src) {
+				const nextImg = new Image();
+				nextImg.src = nextItem.src;
+			}
+
+			// Preload previous image
+			const prevIndex = (this.currentIndex - 1 + this.currentImages.length) % this.currentImages.length;
+			const prevItem = this.currentImages[prevIndex];
+			if (prevItem && prevItem.src) {
+				const prevImg = new Image();
+				prevImg.src = prevItem.src;
+			}
 		}
 
 		prev() {
