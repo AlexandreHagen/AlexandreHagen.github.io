@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="i18n-loading">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,60 +60,60 @@
 <body>
 	<header class="header">
 		<a href="index.html">
-			<img class="left" src="assets/logos/GaryLogoFrame.svg" alt="Gary Sculpteur Logo" width="143" height="150">
+			<img class="left" src="assets/logos/GaryLogoFrame.svg" data-i18n-alt="alt.logo" alt="Gary Sculpteur Logo" width="143" height="150">
 		</a>
 		<div class="right">
 			<div class="lang-selector">
-				<a href="/contact.html" class="active" aria-label="English version">EN</a>
+				<button class="lang-btn" data-lang="en" data-i18n-aria="aria.lang.en">EN</button>
 				<span class="lang-separator">|</span>
-				<a href="/fr/contact.html" aria-label="Version française">FR</a>
+				<button class="lang-btn" data-lang="fr" data-i18n-aria="aria.lang.fr">FR</button>
 			</div>
 			<div class="social">
-				<a href="https://www.instagram.com/garysculpteur/" target="_blank" rel="noopener noreferrer" aria-label="Follow Gary on Instagram">
+				<a href="https://www.instagram.com/garysculpteur/" target="_blank" rel="noopener noreferrer" data-i18n-aria="aria.instagram">
 					<img class="social-icon" src="assets/logos/social/Instagram.svg" alt="Instagram" width="35" height="35">
 				</a>
-				<a href="https://www.artmajeur.com/gary-11" target="_blank" rel="noopener noreferrer" aria-label="View Gary's gallery on Artmajeur">
+				<a href="https://www.artmajeur.com/gary-11" target="_blank" rel="noopener noreferrer" data-i18n-aria="aria.artmajeur">
 					<img class="social-icon" src="assets/logos/social/artmajeur.png" alt="Artmajeur" width="35" height="35">
 				</a>
-				<a href="https://www.facebook.com/sculpteur.gary" target="_blank" rel="noopener noreferrer" aria-label="Follow Gary on Facebook">
+				<a href="https://www.facebook.com/sculpteur.gary" target="_blank" rel="noopener noreferrer" data-i18n-aria="aria.facebook">
 					<img class="social-icon" src="assets/logos/social/Facebook.svg" alt="Facebook" width="35" height="35">
 				</a>
-				<a href="https://fr.linkedin.com/in/gary-sculpteur-571846a1" target="_blank" rel="noopener noreferrer" aria-label="Connect with Gary on LinkedIn">
+				<a href="https://fr.linkedin.com/in/gary-sculpteur-571846a1" target="_blank" rel="noopener noreferrer" data-i18n-aria="aria.linkedin">
 					<img class="social-icon" src="assets/logos/social/Linkedin.svg" alt="LinkedIn" width="35" height="35">
 				</a>
 			</div>
-			<nav class="menu" aria-label="Main navigation">
-				<a class="menu-link" href="index.html#gallery">GALLERY</a>
-				<a class="menu-link" href="index.html#about">ABOUT</a>
-				<a class="menu-link" href="contact.html">CONTACT</a>
+			<nav class="menu" data-i18n-aria="aria.menu">
+				<a class="menu-link" href="index.html#gallery" data-i18n="nav.gallery">GALLERY</a>
+				<a class="menu-link" href="index.html#about" data-i18n="nav.about">ABOUT</a>
+				<a class="menu-link" href="contact.html" data-i18n="nav.contact">CONTACT</a>
 			</nav>
 		</div>
 	</header>
 
-	<img class="banner" src="assets/photo/gary/banner_hands.jpg" alt="Gary sculptor hands working on bronze" width="1920" height="400" loading="eager" fetchpriority="high">
+	<img class="banner" src="assets/photo/gary/banner_hands.jpg" data-i18n-alt="alt.banner.hands" alt="Gary sculptor hands working on bronze" width="1920" height="400" loading="eager" fetchpriority="high">
 
 	<main>
 		<section id="form" class="contact fade-in">
-			<h1 class="title title-big">LEAVE YOUR MESSAGE HERE</h1>
+			<h1 class="title title-big" data-i18n="contact.title">LEAVE YOUR MESSAGE HERE</h1>
 			<form class="contact-form" action="https://formspree.io/f/xpqdzwpe" method="POST">
-				<label for="name" class="visually-hidden">Your name</label>
-				<input type="text" id="name" name="name" placeholder="Your name" required>
+				<label for="name" class="visually-hidden" data-i18n="contact.name">Your name</label>
+				<input type="text" id="name" name="name" data-i18n-placeholder="contact.name" placeholder="Your name" required>
 
-				<label for="email" class="visually-hidden">Your email</label>
-				<input type="email" id="email" name="_replyto" placeholder="Your email" required>
+				<label for="email" class="visually-hidden" data-i18n="contact.email">Your email</label>
+				<input type="email" id="email" name="_replyto" data-i18n-placeholder="contact.email" placeholder="Your email" required>
 
-				<label for="message" class="visually-hidden">Your message</label>
-				<textarea id="message" name="message" placeholder="Message" required></textarea>
+				<label for="message" class="visually-hidden" data-i18n="contact.message">Your message</label>
+				<textarea id="message" name="message" data-i18n-placeholder="contact.message" placeholder="Message" required></textarea>
 
-				<button type="submit">Send</button>
+				<button type="submit" data-i18n="contact.send">Send</button>
 			</form>
 		</section>
 	</main>
 
 	<footer class="footer">
-		<nav aria-label="Footer navigation">
-			<a class="footer-link" href="press.html">PRESS</a>
-			<a class="footer-link" href="contact.html">CONTACT</a>
+		<nav data-i18n-aria="aria.footer">
+			<a class="footer-link" href="press.html" data-i18n="nav.press">PRESS</a>
+			<a class="footer-link" href="contact.html" data-i18n="nav.contact">CONTACT</a>
 		</nav>
 		<div>
 			&copy; <span id="year"></span>

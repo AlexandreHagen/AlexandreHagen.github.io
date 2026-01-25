@@ -170,16 +170,23 @@ img {
 	font-family: var(--font-display);
 	font-size: 0.9rem;
 	margin-left: auto;
+	align-items: center;
 }
 
-.lang-selector a {
+.lang-btn {
 	padding: 0.25rem 0.5rem;
 	border-radius: var(--border-radius);
-	transition: background-color var(--transition-fast);
+	transition: background-color var(--transition-fast), color var(--transition-fast);
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-family: var(--font-display);
+	font-size: 0.9rem;
+	color: inherit;
 }
 
-.lang-selector a:hover,
-.lang-selector a.active {
+.lang-btn:hover,
+.lang-btn.active {
 	background-color: var(--color-accent);
 	color: white;
 }
@@ -1284,4 +1291,35 @@ textarea.invalid {
 		bottom: 80px;
 		right: 10px;
 	}
+}
+
+/* =====================================================
+   i18n - PREVENT FOUC (Flash of Untranslated Content)
+   ===================================================== */
+
+/* Hide content until i18n is loaded */
+html.i18n-loading [data-i18n],
+html.i18n-loading [data-i18n-alt],
+html.i18n-loading [data-i18n-placeholder],
+html.i18n-loading [data-i18n-aria],
+html.i18n-loading [data-i18n-title] {
+	opacity: 0;
+}
+
+/* Smooth transition when content appears */
+[data-i18n],
+[data-i18n-alt],
+[data-i18n-placeholder],
+[data-i18n-aria],
+[data-i18n-title] {
+	transition: opacity 0.15s ease-in;
+}
+
+/* Remove loading class when i18n is ready */
+html:not(.i18n-loading) [data-i18n],
+html:not(.i18n-loading) [data-i18n-alt],
+html:not(.i18n-loading) [data-i18n-placeholder],
+html:not(.i18n-loading) [data-i18n-aria],
+html:not(.i18n-loading) [data-i18n-title] {
+	opacity: 1;
 }
