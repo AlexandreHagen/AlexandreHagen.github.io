@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="initial-scale=1, maximum-scale=5">
-	<title>GARY Sculpteur - Home</title>
-	<meta name="title" property="og:title" content="GARY Sculpteur - Home">
-    <meta name="description" property="og:description" content="Gary is a sculptor artist giving life to bronze art.">
-    <meta name="referrer" content="origin-when-cross-origin">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="GARY Sculpteur - Home">
-    <meta name="twitter:description" content="Gary is a sculptor artist giving life to bronze art.">
-    <meta name="twitter:image" content="https://gary-sculpteur.com/assets/photo/seo/twitter_card.jpg">
-    <!-- <meta property="fb:app_id" content="XXXXXX"> -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://gary-sculpteur.com">
-    <meta property="og:site_name" content="Gary Sculpteur">
-    <meta property="og:image:width" content="733">
-    <meta property="og:image:height" content="384">
-    <meta name="image" property="og:image" content="https://gary-sculpteur.com/assets/photo/seo/facebook_card.jpg">
-	<meta name="author" content="Alexandre Hagen">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
-	<link rel="stylesheet" href="style.css" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gary Sculpteur - Bronze Sculptor Artist</title>
+	<meta name="description" content="Gary is a French bronze sculptor artist creating organic forms with telluric properties for landscape and architectural integration.">
+
+	<!-- Canonical & Alternate Languages -->
+	<link rel="canonical" href="https://gary-sculpteur.com/">
+	<link rel="alternate" hreflang="en" href="https://gary-sculpteur.com/">
+	<link rel="alternate" hreflang="fr" href="https://gary-sculpteur.com/fr/">
+	<link rel="alternate" hreflang="x-default" href="https://gary-sculpteur.com/">
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://gary-sculpteur.com/">
+	<meta property="og:site_name" content="Gary Sculpteur">
+	<meta property="og:title" content="Gary Sculpteur - Bronze Sculptor Artist">
+	<meta property="og:description" content="Gary is a French bronze sculptor artist creating organic forms with telluric properties for landscape and architectural integration.">
+	<meta property="og:image" content="https://gary-sculpteur.com/assets/photo/seo/facebook_card.jpg">
+	<meta property="og:image:width" content="733">
+	<meta property="og:image:height" content="384">
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Gary Sculpteur - Bronze Sculptor Artist">
+	<meta name="twitter:description" content="Gary is a French bronze sculptor artist creating organic forms with telluric properties.">
+	<meta name="twitter:image" content="https://gary-sculpteur.com/assets/photo/seo/twitter_card.jpg">
+
+	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="assets/logos/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="assets/logos/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="assets/logos/favicon/favicon-16x16.png">
@@ -29,145 +36,219 @@
 	<link rel="mask-icon" href="assets/logos/favicon/safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-137579544-1"></script>
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="style.css">
+
+	<!-- Schema.org JSON-LD -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "Person",
+				"@id": "https://gary-sculpteur.com/#gary",
+				"name": "Gary",
+				"jobTitle": "Sculptor",
+				"description": "French sculptor artist specialized in bronze, creating organic forms with telluric properties for landscape and architectural integration.",
+				"sameAs": [
+					"https://www.instagram.com/garysculpteur/",
+					"https://www.artmajeur.com/gary-11",
+					"https://www.facebook.com/sculpteur.gary",
+					"https://fr.linkedin.com/in/gary-sculpteur-571846a1"
+				],
+				"url": "https://gary-sculpteur.com"
+			},
+			{
+				"@type": "WebSite",
+				"@id": "https://gary-sculpteur.com/#website",
+				"name": "Gary Sculpteur",
+				"url": "https://gary-sculpteur.com",
+				"inLanguage": ["en", "fr"]
+			},
+			{
+				"@type": "VisualArtwork",
+				"name": "Talos",
+				"artform": "Sculpture",
+				"artMedium": "Bronze",
+				"description": "Bronze sphere sculpture, 20cm diameter",
+				"creator": { "@id": "https://gary-sculpteur.com/#gary" }
+			},
+			{
+				"@type": "VisualArtwork",
+				"name": "Arborescence",
+				"artform": "Sculpture",
+				"artMedium": "Bronze",
+				"description": "Bronze sphere sculpture with organic patterns, 20cm diameter",
+				"creator": { "@id": "https://gary-sculpteur.com/#gary" }
+			},
+			{
+				"@type": "VisualArtwork",
+				"name": "Scherie",
+				"artform": "Sculpture",
+				"artMedium": "Bronze",
+				"description": "Bronze sphere sculpture, 30cm diameter",
+				"creator": { "@id": "https://gary-sculpteur.com/#gary" }
+			},
+			{
+				"@type": "VisualArtwork",
+				"name": "Brocelian",
+				"artform": "Sculpture",
+				"artMedium": "Bronze",
+				"description": "Bronze sphere sculpture, 50cm diameter",
+				"creator": { "@id": "https://gary-sculpteur.com/#gary" }
+			}
+		]
+	}
+	</script>
+
+	<!-- Google Analytics 4 -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'UA-137579544-1');
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-XXXXXXXXXX');
 	</script>
 </head>
 <body>
 	<header class="header">
 		<a href="index.html">
-			<img class="left" src="assets/logos/GaryLogoFrame.svg" alt="Gary Logo">
+			<img class="left" src="assets/logos/GaryLogoFrame.svg" alt="Gary Sculpteur Logo" width="143" height="150">
 		</a>
 		<div class="right">
+			<div class="lang-selector">
+				<a href="/" class="active" aria-label="English version">EN</a>
+				<span class="lang-separator">|</span>
+				<a href="/fr/" aria-label="Version française">FR</a>
+			</div>
 			<div class="social">
-				<a href="https://www.instagram.com/garysculpteur/" target="_blank" rel="noreferrer">
-					<img class="social-icon" src="assets/logos/social/Instagram.svg" alt="instagram">
+				<a href="https://www.instagram.com/garysculpteur/" target="_blank" rel="noopener noreferrer" aria-label="Follow Gary on Instagram">
+					<img class="social-icon" src="assets/logos/social/Instagram.svg" alt="Instagram" width="35" height="35">
 				</a>
-				<a href="https://www.artmajeur.com/gary-11" target="_blank" rel="noreferrer">
-					<img class="social-icon" src="assets/logos/social/artmajeur.png" alt="artmajeur">
+				<a href="https://www.artmajeur.com/gary-11" target="_blank" rel="noopener noreferrer" aria-label="View Gary's gallery on Artmajeur">
+					<img class="social-icon" src="assets/logos/social/artmajeur.png" alt="Artmajeur" width="35" height="35">
 				</a>
-				<a href="https://www.facebook.com/sculpteur.gary" target="_blank" rel="noreferrer">
-					<img class="social-icon" src="assets/logos/social/Facebook.svg" alt="facebook">
+				<a href="https://www.facebook.com/sculpteur.gary" target="_blank" rel="noopener noreferrer" aria-label="Follow Gary on Facebook">
+					<img class="social-icon" src="assets/logos/social/Facebook.svg" alt="Facebook" width="35" height="35">
 				</a>
-				<a href="https://fr.linkedin.com/in/gary-sculpteur-571846a1" target="_blank" rel="noreferrer">
-					<img class="social-icon" src="assets/logos/social/Linkedin.svg" alt="linkedin">
+				<a href="https://fr.linkedin.com/in/gary-sculpteur-571846a1" target="_blank" rel="noopener noreferrer" aria-label="Connect with Gary on LinkedIn">
+					<img class="social-icon" src="assets/logos/social/Linkedin.svg" alt="LinkedIn" width="35" height="35">
 				</a>
-			</div>	
-			<nav class="menu">
+			</div>
+			<nav class="menu" aria-label="Main navigation">
 				<a class="menu-link" href="#gallery">GALLERY</a>
 				<a class="menu-link" href="#about">ABOUT</a>
 				<a class="menu-link" href="contact.html">CONTACT</a>
 			</nav>
 		</div>
 	</header>
-	<img class="banner" src="assets/photo/artWork/banner.jpg" alt="banner Thétys">
-	<section>
-		<h1 class="title title-big" id="gallery">GALLERY</h1>
-		<h2 class="title">SPHERES</h2>
-		<div class="carousel">
-			<div>
-				<img src="assets/photo/artWork/Talos.jpg" alt="Talos">
-				<div class="info">Talos &#8709; 20cm</div>
+
+	<img class="banner" src="assets/photo/artWork/banner.jpg" alt="Thetys bronze sculpture by Gary - banner" width="1920" height="400" loading="eager" fetchpriority="high">
+
+	<main>
+		<section aria-labelledby="gallery-title">
+			<h1 class="title title-big" id="gallery">GALLERY</h1>
+
+			<h2 class="title" id="gallery-title">SPHERES</h2>
+			<div class="carousel" role="region" aria-label="Spheres sculpture gallery">
+				<figure class="carousel-item">
+					<img src="assets/photo/artWork/Talos.jpg" alt="Talos - Bronze sphere sculpture 20cm diameter by Gary" loading="lazy" decoding="async">
+					<figcaption>Talos &#8709; 20cm</figcaption>
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/artWork/IMG_3207.jpg" alt="Arborescence - Bronze sphere sculpture with organic tree-like patterns 20cm" loading="lazy" decoding="async">
+					<figcaption>Arborescence &#8709; 20cm</figcaption>
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/artWork/Talos2.jpg" alt="Talos - Detail view of bronze sphere sculpture 20cm" loading="lazy" decoding="async">
+					<figcaption>Talos &#8709; 20cm</figcaption>
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/artWork/Scherie1.jpg" alt="Scherie - Bronze sphere sculpture 30cm diameter" loading="lazy" decoding="async">
+					<figcaption>Scherie &#8709; 30cm</figcaption>
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/artWork/IMG_0080.jpg" alt="Talos - Bronze sphere in natural setting" loading="lazy" decoding="async">
+					<figcaption>Talos &#8709; 20cm</figcaption>
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/artWork/Scherie2.jpg" alt="Scherie - Alternative view of bronze sphere sculpture 30cm" loading="lazy" decoding="async">
+					<figcaption>Scherie &#8709; 30cm</figcaption>
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/artWork/IMG_0086.jpg" alt="Talos - Bronze sphere sculpture outdoor installation" loading="lazy" decoding="async">
+					<figcaption>Talos &#8709; 20cm</figcaption>
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/artWork/IMG_0081.jpg" alt="Talos - Bronze sphere with organic surface texture" loading="lazy" decoding="async">
+					<figcaption>Talos &#8709; 20cm</figcaption>
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/artWork/IMG_0148.jpg" alt="Brocelian - Large bronze sphere sculpture 50cm diameter" loading="lazy" decoding="async">
+					<figcaption>Brocelian &#8709; 50cm</figcaption>
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/artWork/IMG_9580.jpg" alt="Talos - Bronze sphere sculpture studio view" loading="lazy" decoding="async">
+					<figcaption>Talos &#8709; 20cm</figcaption>
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/artWork/DSC_5964.jpg" alt="Brocelian - Bronze sphere sculpture in landscape setting 50cm" loading="lazy" decoding="async">
+					<figcaption>Brocelian &#8709; 50cm</figcaption>
+				</figure>
 			</div>
-			<div>
-				<img src="assets/photo/artWork/IMG_3207.jpg" alt="Arborescence">
-				<div class="info">Arborescence &#8709; 20cm</div>
+
+			<h2 class="title">SKY CATCHERS</h2>
+			<div class="carousel" role="region" aria-label="Sky Catchers sculpture gallery">
+				<figure class="carousel-item">
+					<img src="assets/photo/skyCatcher/IMG_0072.jpg" alt="Sky Catcher - Sound sculpture created with Michel Redolfi" loading="lazy" decoding="async">
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/skyCatcher/IMG_3192.jpg" alt="Sky Catcher - Resonant bronze vine sculpture" loading="lazy" decoding="async">
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/skyCatcher/IMG_3193.jpg" alt="Sky Catcher - Outdoor sound installation" loading="lazy" decoding="async">
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/skyCatcher/IMG_3194.jpg" alt="Sky Catcher - Detail of forged resonant alloy" loading="lazy" decoding="async">
+				</figure>
+				<figure class="carousel-item">
+					<img src="assets/photo/skyCatcher/IMG_3195.jpg" alt="Sky Catcher - Sound sculpture in garden setting" loading="lazy" decoding="async">
+				</figure>
 			</div>
-			<div>
-				<img src="assets/photo/artWork/Talos2.jpg" alt="Talos">
-				<div class="info">Talos &#8709; 20cm</div>
-			</div>
-			<div>
-				<img src="assets/photo/artWork/Scherie1.jpg" alt="Schèrie">
-				<div class="info">Scherie &#8709; 30cm</div>
-			</div>
-			<div>
-				<img src="assets/photo/artWork/IMG_0080.jpg" alt="Talos">
-				<div class="info">Talos &#8709; 20cm</div>
-			</div>
-			<div>
-				<img src="assets/photo/artWork/Scherie2.jpg", alt="Schèrie">
-				<div class="info">Scherie &#8709; 30cm</div>
-			</div>
-			<div>
-				<img src="assets/photo/artWork/IMG_0086.jpg" alt="Talos">
-				<div class="info">Talos &#8709; 20cm</div>
-			</div>
-			<div>
-				<img src="assets/photo/artWork/IMG_0081.jpg" alt="Talos">
-				<div class="info">Talos &#8709; 20cm</div>
-			</div>
-			<div>
-				<img src="assets/photo/artWork/IMG_0148.jpg" alt="Brocélian">
-				<div class="info">Brocelian &#8709; 50cm</div>
-			</div>
-			<div>
-				<img src="assets/photo/artWork/IMG_9580.jpg" alt="Talos">
-				<div class="info">Talos &#8709; 20cm</div>
-			</div>
-			<div>
-				<img src="assets/photo/artWork/DSC_5964.jpg" alt="Brocélian">
-				<div class="info">Brocelian &#8709; 50cm</div>
-			</div>
-		</div>
-		<h2 class="title">SKY CATCHERS</h2>
-		<div class="carousel">
-			<div>
-				<img src="assets/photo/skyCatcher/IMG_0072.jpg", alt="Sky catcher">
-			</div>
-			<div>
-				<img src="assets/photo/skyCatcher/IMG_3192.jpg" alt="Sky catcher">
-			</div>
-			<div>
-				<img src="assets/photo/skyCatcher/IMG_3193.jpg" alt="Sky catcher">
-			</div>
-			<div>
-				<img src="assets/photo/skyCatcher/IMG_3194.jpg" alt="Sky catcher">
-			</div>
-			<div>
-				<img src="assets/photo/skyCatcher/IMG_3195.jpg" alt="Sky catcher">
-			</div>
-		</div>
-		<div class="sky-catcher">
-			The Sky Catchers, designed by the sculptor Gary and Michel Redolfi, are whimsical jungle vines, which spring out from the ground or wrap around a tree branch. Forged in a very resonant alloy, they vibrate throughout their length while spatialising finely the sound around, like acoustic misting. This musical exteriorization gives back its place to aerial listening. Sound joins the world of strings through its shine. Consonance of art with its space.
-		</div>
-	</section>
-	<section class="about">
-		<h1 class="title title-big" id="about">ABOUT</h1>
-		<div class="bio">
-			<img class="gary" src="assets/photo/gary/P1070528.jpg" alt="Gary Photo">
-			<p class="description">
-				What if the ultimate quest was to become a whole? <br />
-				A collection with no distinct edge, no defined selvage? <br />
-				Looking – becoming and finally being one with our surroundings. <br />
-				Erasing – forgetting in order to be pervious. <br />
-				Accepting to lose oneself so as to receive better. <br />
-				Combine and form a shape, a drawing, a volume of a sensed whole, carrier of softness and energy. <br />
-				Gary’s artistic work is organic, such as bronze skins with telluric pulses properties. Within the curves of its shapes, the force snuggles in an everlasting cycle for the birth of a world.
+			<p class="sky-catcher fade-in">
+				The Sky Catchers, designed by the sculptor Gary and Michel Redolfi, are whimsical jungle vines, which spring out from the ground or wrap around a tree branch. Forged in a very resonant alloy, they vibrate throughout their length while spatialising finely the sound around, like acoustic misting. This musical exteriorization gives back its place to aerial listening. Sound joins the world of strings through its shine. Consonance of art with its space.
 			</p>
-		</div>
-	</section>
+		</section>
+
+		<section class="about fade-in" aria-labelledby="about-title">
+			<h1 class="title title-big" id="about">ABOUT</h1>
+			<div class="bio">
+				<img class="gary" src="assets/photo/gary/P1070528.jpg" alt="Gary - French bronze sculptor artist in her studio" loading="lazy" decoding="async">
+				<p class="description">
+					What if the ultimate quest was to become a whole? <br>
+					A collection with no distinct edge, no defined selvage? <br>
+					Looking – becoming and finally being one with our surroundings. <br>
+					Erasing – forgetting in order to be pervious. <br>
+					Accepting to lose oneself so as to receive better. <br>
+					Combine and form a shape, a drawing, a volume of a sensed whole, carrier of softness and energy. <br>
+					Gary's artistic work is organic, such as bronze skins with telluric pulses properties. Within the curves of its shapes, the force snuggles in an everlasting cycle for the birth of a world.
+				</p>
+			</div>
+		</section>
+	</main>
+
 	<footer class="footer">
-		<div>
+		<nav aria-label="Footer navigation">
 			<a class="footer-link" href="press.html">PRESS</a>
 			<a class="footer-link" href="contact.html">CONTACT</a>
-		</div>
+		</nav>
 		<div>
-			&copy;
-			<script type="text/javascript">
-				document.write(new Date().getFullYear());
-			</script>
-			<a href="https://github.com/AlexandreHagen" target="_blank" rel="noreferrer">Alexandre</a>
+			&copy; <span id="year"></span>
+			<a href="https://github.com/AlexandreHagen" target="_blank" rel="noopener noreferrer">Alexandre</a>
 		</div>
 	</footer>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-	<script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-	<script type="text/javascript" src="slick-settings.js"></script>
-	<script type="text/javascript" src="smooth-scrolling.js"></script>
-	<script type="text/javascript" charset="utf-8" src="browser-update.js"></script>
+
+	<script src="main.js" defer></script>
 </body>
 </html>
