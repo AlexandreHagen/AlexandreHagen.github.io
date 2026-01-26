@@ -971,32 +971,36 @@ textarea.invalid {
 	justify-content: space-between;
 	width: 28px;
 	height: 20px;
-	background: transparent;
+	background: transparent !important;
+	background-color: transparent !important;
 	border: none;
 	cursor: pointer;
 	padding: 0;
 	z-index: 100;
+	/* Remove iOS/Safari default button styles */
+	-webkit-appearance: none;
+	appearance: none;
 	/* Remove tap highlight and selection */
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	user-select: none;
+	touch-action: manipulation;
 }
 
 /* Remove default button styles and focus outline */
-.hamburger:focus {
-	outline: none;
-	background: transparent;
-}
-
+.hamburger:focus,
+.hamburger:hover,
 .hamburger:active {
-	background: transparent;
+	outline: none;
+	background: transparent !important;
+	background-color: transparent !important;
 }
 
 .hamburger:focus-visible {
 	outline: 2px solid var(--color-accent);
 	outline-offset: 4px;
-	background: transparent;
+	background: transparent !important;
 }
 
 .hamburger span {
