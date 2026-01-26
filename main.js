@@ -831,6 +831,10 @@
 		if (langSelector) {
 			const mobileLang = langSelector.cloneNode(true);
 			mobileLang.className = 'mobile-lang';
+			// Remove i18n-init flag so initLanguageSelector() will bind new event listeners
+			mobileLang.querySelectorAll('.lang-btn').forEach(btn => {
+				delete btn.dataset.i18nInit;
+			});
 			menu.appendChild(mobileLang);
 		}
 
@@ -1011,6 +1015,8 @@
 		setYear();
 		initFadeInAnimations();
 		initMobileMenu();
+		// Re-init language selector to bind events on cloned mobile menu buttons
+		i18n.initLanguageSelector();
 		initBackToTop();
 		initContactForm();
 		initCarousels();
