@@ -264,7 +264,8 @@ img {
 	transform: scale(0.8);
 }
 
-.carousel-item img {
+.carousel-item img,
+.carousel-item video {
 	max-height: 40em;
 	max-width: 100%;
 	width: auto;
@@ -341,7 +342,8 @@ img {
 }
 
 @media (max-width: 640px) {
-	.carousel-item img {
+	.carousel-item img,
+	.carousel-item video {
 		max-height: 23em;
 	}
 

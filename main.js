@@ -552,20 +552,26 @@
 		// Add click handlers to carousel items
 		document.querySelectorAll('.carousel').forEach(carousel => {
 			const items = carousel.querySelectorAll('.carousel-item');
-			const images = Array.from(items).map(item => {
+			const imageItems = [];
+			const imageIndexMap = [];
+			Array.from(items).forEach((item, index) => {
 				const img = item.querySelector('img');
+				if (!img) return;
 				const caption = item.querySelector('figcaption');
-				return {
-					src: img ? img.src : '',
-					alt: img ? img.alt : '',
-					caption: caption ? caption.textContent : (img ? img.alt : '')
-				};
+				imageItems.push({
+					src: img.src,
+					alt: img.alt,
+					caption: caption ? caption.textContent : img.alt
+				});
+				imageIndexMap.push(index);
 			});
 
 			items.forEach((item, index) => {
+				const lightboxIndex = imageIndexMap.indexOf(index);
+				if (lightboxIndex === -1) return;
 				item.style.cursor = 'pointer';
 				item.addEventListener('click', () => {
-					lightbox.open(images, index);
+					lightbox.open(imageItems, lightboxIndex);
 				});
 			});
 		});
