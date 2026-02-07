@@ -5,6 +5,7 @@
 	<!-- Home Page -->
 	<url>
 		<loc>https://gary-sculpteur.com/</loc>
+		<lastmod>2026-02-07</lastmod>
 		<xhtml:link rel="alternate" hreflang="en" href="https://gary-sculpteur.com/?lang=en"/>
 		<xhtml:link rel="alternate" hreflang="fr" href="https://gary-sculpteur.com/?lang=fr"/>
 		<xhtml:link rel="alternate" hreflang="x-default" href="https://gary-sculpteur.com/"/>
@@ -15,6 +16,7 @@
 	<!-- Contact Page -->
 	<url>
 		<loc>https://gary-sculpteur.com/contact.html</loc>
+		<lastmod>2026-02-07</lastmod>
 		<xhtml:link rel="alternate" hreflang="en" href="https://gary-sculpteur.com/contact.html?lang=en"/>
 		<xhtml:link rel="alternate" hreflang="fr" href="https://gary-sculpteur.com/contact.html?lang=fr"/>
 		<xhtml:link rel="alternate" hreflang="x-default" href="https://gary-sculpteur.com/contact.html"/>
@@ -25,6 +27,7 @@
 	<!-- Press Page -->
 	<url>
 		<loc>https://gary-sculpteur.com/press.html</loc>
+		<lastmod>2026-02-07</lastmod>
 		<xhtml:link rel="alternate" hreflang="en" href="https://gary-sculpteur.com/press.html?lang=en"/>
 		<xhtml:link rel="alternate" hreflang="fr" href="https://gary-sculpteur.com/press.html?lang=fr"/>
 		<xhtml:link rel="alternate" hreflang="x-default" href="https://gary-sculpteur.com/press.html"/>
