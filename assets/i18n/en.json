@@ -24,6 +24,8 @@
 
 	"home.gallery.title": "GALLERY",
 	"home.spheres.title": "SPHERES",
+	"home.insitu.title": "SPHERES IN SITU",
+	"home.insitu.text": "Nestled in the hollow of an ancient olive tree, resting on a bed of moss or emerging from dense foliage, the bronze spheres find their place as if they had always been there. They become the silent guardians of a garden, the secret companions of a landscape. Their patina evolves with the seasons, capturing the light of dawn and the warmth of dusk. To welcome a sphere into your space is to invite a dialogue between art and nature, a living presence that transforms every glance into contemplation.",
 	"home.skycatchers.title": "SKY CATCHERS",
 	"home.skycatchers.text": "The Sky Catchers, designed by the sculptor Gary and Michel Redolfi, are whimsical jungle vines, which spring out from the ground or wrap around a tree branch. Forged in a very resonant alloy, they vibrate throughout their length while spatialising finely the sound around, like acoustic misting. This musical exteriorization gives back its place to aerial listening. Sound joins the world of strings through its shine. Consonance of art with its space.",
 	"home.about.title": "ABOUT",
@@ -78,6 +80,17 @@
 	"alt.talos6": "Talos - Bronze sphere sculpture studio view",
 	"alt.brocelian2": "Brocelian - Bronze sphere sculpture in landscape setting 50cm",
 	"alt.hermes1": "Hermès - Bronze sphere sculpture with red patina 30cm diameter",
+
+	"alt.insitu1": "Bronze sphere sculpture in situ among tropical plants",
+	"alt.insitu2": "Bronze sphere sculpture in situ on olive tree branch",
+	"alt.insitu3": "Bronze sphere sculpture in situ with hillside landscape view",
+	"alt.insitu4": "Bronze sphere sculpture in situ nestled in olive tree",
+	"alt.insitu6": "Bronze sphere sculptures in situ cradled in ancient tree trunk",
+	"alt.insitu7": "Bronze sphere sculpture in situ on moss with mist and water reflection",
+	"alt.insitu8": "Bronze sphere sculpture in situ by poolside with mountain view",
+	"alt.insitu9": "Bronze sphere sculpture in situ on stone pedestal in garden with ivy",
+
+	"aria.insitu.gallery": "Spheres In Situ sculpture gallery",
 
 	"alt.skycatcher1": "Sky Catcher - Sound sculpture created with Michel Redolfi",
 	"alt.skycatcher2": "Sky Catcher - Resonant bronze vine sculpture",
